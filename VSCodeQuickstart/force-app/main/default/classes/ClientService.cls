@@ -3,3 +3,6 @@ public class ClientService {
         return new Lead(LastName = 'Test', Email = 'test@test.test');
     }
 }
+<<<<<<< HEAD
+=======
+>>>>>>> HomeWork_BE_1
