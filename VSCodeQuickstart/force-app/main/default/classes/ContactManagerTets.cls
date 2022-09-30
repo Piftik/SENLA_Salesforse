@@ -10,18 +10,16 @@ public class ContactManagerTest {
         testWrapper.homePhone = '123-1234';
         testWrapper.brokerPercentDeal  = 10.4;
 
-    
-
-        return ContactManager.createContact(testWrapper, true);
+        ContactManager.createContact(testWrapper, true);
     }   
    
     @isTest static void getContactByIdTest(){
         
         Id testId = '000001';
-        List<Contact> cts = ContactManager.getContactById(testId, 'testName');
+        List<Contact> contactTest = ContactManager.getContactById(testId, 'testName');
     }
 
-    @isTest static void getContactsByIdsTest(){
+    @isTest static void getContacontactByIdsTest(){
 
         List<Id> testIds = new List<Id>();
 
@@ -29,12 +27,12 @@ public class ContactManagerTest {
         testIds.add('000003');
         testIds.add('000004');
 
-        List<Contact> cts = ContactManager.getContactById(testIds, 'testName');
+        List<Contact> contactTest = ContactManager.getContactById(testIds, 'testName');
     }
 
     @isTest static void getContactsByEmailTest(){
        
-        List<Contact> cts = ContactManager.getContactsByEmail('testEmail@gmail.com');
+        List<Contact> contact = ContactManager.getContactsByEmail('testEmail@gmail.com');
     }
 
    

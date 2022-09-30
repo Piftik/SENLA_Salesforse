@@ -10,7 +10,7 @@ public  class PropertyManagerTest {
         testWrapper.costSale = 100000;        
 
 
-        return PropertyManager.createProperty(testWrapper, true);
+       PropertyManager.createProperty(testWrapper, true);
     }
    
    

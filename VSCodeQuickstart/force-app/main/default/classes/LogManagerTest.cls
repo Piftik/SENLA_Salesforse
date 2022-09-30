@@ -2,11 +2,10 @@
 public class LogManagerTest {
     @isTest static void createLogTest() {
         LogManager.LogWrapper testWrapper = new LogWrapper();
-        testWrapper.name = 'testName';
         testWrapper.message = 'testMessage';
-        testWrapper.type = 'testType';        
+        testWrapper.logType = 'testLogType';        
 
-        return LogManager.createLog(testWrapper, true);
+        LogManager.createLog(testWrapper, true);
 
     }
    
@@ -28,15 +27,11 @@ public class LogManagerTest {
         List<Log__c> logs = LogManager.getLogsByIds(testIds, 'testName');
     }
 
-    @isTest static void getLogsByMessageTest(){
-       
-        List<Log__c> logs = LogManager.getLogsByMessage('testMessage');
 
-    }
 
-    @isTest static void ggetLogsByTypeTest(){
+    @isTest static void getLogsBylogTypesTest(){
        
-        List<Log__c> logs = LogManager.getLogsByType('testType');
+        List<Log__c> logs = LogManager.getLogsBylogTypes('testlogType');
 
     }
 }

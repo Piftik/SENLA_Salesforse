@@ -8,7 +8,7 @@ public class DealManagerTest {
             testWrapper.sellingProperty = 550.0;
             testWrapper.finishLease = 01.01.2022;     
            
-            return DealManager.createDeal(testWrapper, true);    
+            DealManager.createDeal(testWrapper, true);    
         }       
        
         @isTest static void getDealsByIdTest(){
