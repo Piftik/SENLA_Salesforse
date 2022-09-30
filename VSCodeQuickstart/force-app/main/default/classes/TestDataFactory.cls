@@ -15,14 +15,14 @@ public class TestDataFactory {
         return contacts;
     }
 
-    public static Deal__c createDeal(Property__c property, String customer) {
-        Deal__c deal = new Deal__c(Property__c = property, PropertyId__c = property.Id, Customer__c = customer);
+    public static Deal__c createDeal(Property_New__c property, String buyer) {
+        Deal__c deal = new Deal__c(Property_New__c = property,  Buyer__c = buyer);
         insert deal;
         return deal;
     }
 
-    public static Property__c createProperty(Contact contact, Double costSale, String address) {
-        Property__c property = new Property__c(Contact = contact, ContactId = contact.Id, Cost_Sale__c = salePrice);
+    public static Property_New__c createProperty(Contact contact, Double costSale, String address) {
+        Property_New__c property = new Property_New__c(Contact = contact,  Cost_Sale__c = costSale);
         insert property;
         return property;
     }

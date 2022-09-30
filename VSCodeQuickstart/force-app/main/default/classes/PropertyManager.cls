@@ -1,4 +1,7 @@
 public with sharing class PropertyManager {
+
+
+
     public class PropertyWrapper {
         public String name {get; set;}
         public String address {get; set;}
@@ -7,11 +10,11 @@ public with sharing class PropertyManager {
         
     }
 
-    public static Property__c createProperty(PropertyWrapper wrapper, Boolean serialize) {
-        Property__c property = new Property__c();
+    public static Property_New__c createProperty(PropertyWrapper wrapper, Boolean serialize) {
+        Property_New__c property = new Property_New__c();
         property.Name = wrapper.name;
         property.Address__c = wrapper.address;
-        property.Monthly_Rental_Price__c = wrappermonthlyRentalPrice;
+        property.Monthly_Rental_Price__c = wrapper.monthlyRentalPrice;
         property.Cost_Sale__c = wrapper.costSale;
 
  
@@ -22,24 +25,24 @@ public with sharing class PropertyManager {
  
  
 
-    public static List<Property__c> getPropertiesByIds(List<Id> ids, String fields){
+    public static List<Property_New__c> getPropertiesByIds(List<Id> ids, String fields){
 
-        String query = 'select ' + fields + ' from Property__c where Id in :ids';
-        List<Property__c> properties = Database.query(query);
+        String query = 'select ' + fields + ' from Property_New__c where Id in :ids';
+        List<Property_New__c> properties = Database.query(query);
         return properties;
     } 
     
-    public static Property__c getPropertyById(Id propertyId, String fields){
+    public static Property_New__c getPropertyById(Id propertyId, String fields){
 
-        String query = 'select ' + fields + ' from Property__c where Id=:propertyId';
-        Property__c property = Database.query(query);
+        String query = 'select ' + fields + ' from Property_New__c where Id=:propertyId';
+        Property_New__c property = Database.query(query);
         return property;
     }
     
-    public static List<Property__c> getPropertiesByAdress(String address){
+    public static List<Property_New__c> getPropertiesByAdress(String fields){
 
-        String query = 'select ' + fields + ' from Property__c where Adress__c=:address';
-        List<Property__c> properties = Database.query(query);
+        String query = 'select ' + fields + ' from Property_New__c where Adress__c=:address';
+        List<Property_New__c> properties = Database.query(query);
         return properties;
     } 
 
