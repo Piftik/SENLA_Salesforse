@@ -1,23 +1,25 @@
 public with sharing class ContactManager {
     
         public static String fields = 
-        'Id, Name, Phone, HomePhone, Birthdate, Email, Total_Property_Price__c, Broker__c';
+        'Id, Name, Phone, HomePhone, Email, Total_Property_Price__c, Broker__c';
         
  
  
         public class ContactWrapper {
-         public String name {get; set;}
+         public String firstName {get; set;}
+         public String lastName {get; set;}
          public String phone {get; set;}
          public String homePhone {get; set;}
          public String email  {get; set;}
-         public String birthdate  {get; set;}
+         public Date birthdate  {get; set;}
          public Double brokerPercentDeal {get; set;}
                  
      }
  
      public static Contact createContact(ContactWrapper wrapper, Boolean serialize) {
          Contact contact = new Contact();
-         contact.Name = wrapper.name;
+         contact.FirstName = wrapper.firstName;
+         contact.LastName = wrapper.lastName;
          contact.Phone = wrapper.phone;
          contact.HomePhone = wrapper.homePhone;
          contact.Email = wrapper.email;
@@ -58,7 +60,7 @@ public with sharing class ContactManager {
 
      public static List<Contact> getContactsByBirthdater(String birthdate){
  
-        if (birthdate == date.today().format()) return new List<Contact>();
+        if (birthdate == Date.today()) return new List<Contact>();
         
         String query = 'select ' + fields + ' from Contact where Birthdate=:birthdate';
         List<Contact> contacts = Database.query(query);

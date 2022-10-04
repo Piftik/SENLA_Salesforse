@@ -1,4 +1,7 @@
 public inherited sharing class LogManager {
+    
+    private static final String DEFAULT_TYPE = 'Standard log';
+
     public class LogWrapper {
         public String logType {get; set;}
         public String message {get; set;}
