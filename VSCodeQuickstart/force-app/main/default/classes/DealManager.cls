@@ -1,5 +1,7 @@
 public inherited sharing class DealManager {
 
+    public static final Id SALE_RECORD_TYPE_ID = '';
+
         public class DealWrapper {
             public Id buyer {get; set;}
             public Id salesman {get; set;}
@@ -46,4 +48,17 @@ public inherited sharing class DealManager {
             Deal__c deal = Database.query(query);
             return deal;
         }
+        
+
+
+public static List<Deal__c> getNotClosedSaleDealsByProperties(List<Id> propertyIds) {
+   return [
+           SELECT Id
+           FROM Deal__c
+           WHERE Property__c IN :propertyIds
+           AND Status__c NOT IN ('Closed Won', 'Closed', 'Closed Lost')
+           AND RecodrTypeId = :SALE_RECORD_TYPE_ID
+   ];
+}
+
 }
