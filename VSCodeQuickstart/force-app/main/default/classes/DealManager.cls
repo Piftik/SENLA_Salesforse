@@ -1,9 +1,11 @@
 public inherited sharing class DealManager {
 
+    public static final Id SALE_RECORD_TYPE_ID = '';
+
         public class DealWrapper {
             public Id buyer {get; set;}
             public Id salesman {get; set;}
-            public Id sellingProperty {get; set;}
+            public Id property {get; set;}
             public Date finishLease {get; set;}
         }
     
@@ -11,7 +13,7 @@ public inherited sharing class DealManager {
             Deal__c deal = new Deal__c();
             deal.Buyer__c = wrapper.buyer;
             deal.Salesman__c = wrapper.salesman;
-            deal.Selling_Property__c = wrapper.sellingProperty;
+            deal.Property_New__c = wrapper.property;
             deal.Finish_Lease__c = wrapper.finishLease;
     
             if (serialize) insert deal;
@@ -34,16 +36,19 @@ public inherited sharing class DealManager {
         }
 
         public static void deleteDealById(Id dealId, String fields) {
-            delete [SELECT Id FROM Deal__c WHERE Deal.Id IN : idss];
+            delete [SELECT Id FROM Deal__c WHERE Deal.Id IN : Ids];
         }
 
-        public static Deal__c getDealFinishLease(Id dealId, String fields){
+     
 
-            if (finishLease == today().addDays(5)) {
-                Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();//хотел чтоб при аренде когда остается 5 дней до конца отпровлялось письмо, но разобраться до конца не смог, не хватило времени.                
-            }
-            String query = 'select ' + fields + ' from Deal__c where Id=:dealId';
-            Deal__c deal = Database.query(query);
-            return deal;
-        }
+public static List<Deal__c> getNotClosedSaleDealsByProperties(List<Id> propertyIds) {
+   return [
+           SELECT Id
+           FROM Deal__c
+           WHERE Property_New__c IN :propertyIds
+           AND Status__c NOT IN ('Closed Won', 'Closed', 'Closed Lost')
+           AND RecordTypeId = :SALE_RECORD_TYPE_ID
+   ];
+}
+
 }
