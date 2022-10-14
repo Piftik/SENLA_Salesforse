@@ -43,5 +43,4 @@ public with sharing class PropertyManager {
         return properties;
     } 
 
-    //Еще была идея сгруппировать проперти по адресам(страны,штаты)
 }
