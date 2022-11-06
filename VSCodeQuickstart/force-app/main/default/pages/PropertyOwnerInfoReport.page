@@ -1,0 +1,76 @@
+<apex:page lightningStylesheets="true" standardController="Contact" extensions="PropertyOwnerController" >
+       <head>
+        <style type="text/css">
+ 
+
+            table {
+                border-collapse: collapse;
+                width: 100%;             
+            }
+            table, th, td {
+                border: 3px solid black;
+                text-align: center;
+                vertical-align: middle;
+                line-height: 24px;
+            }
+         
+            .header {
+                display: flex;
+                justify-content: center;
+            }
+            .property_details, .deals_table_container, .stamp {
+                margin: 24px 0;
+            }
+            .stamp {
+                display: flex;
+                justify-content: flex-end;
+                height: 96px;
+                width: 100%;
+            }
+            .stamp img {
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+        </style>
+    </head>
+          <div class="header">
+            <h1>Property Owner Info Report</h1>
+        </div>
+     <div class="property_details">
+            <p><b>Property Owner Name:</b> {!Contact.Name} </p>
+            <p><b>Total Properties Price:</b> {!Contact.Total_Property_Price__c} </p>
+        </div>
+    <table >
+        <tr bgcolor='aqua'><th >Property Type</th><th>Column1</th><th>Column2</th><th>Column3</th></tr>
+        <apex:repeat value="{! officeDeals }" var="odl">
+        	<tr>
+                <td>{! odl.recordTypeName }</td>
+                <td>{! odl.amauntDels }</td>
+                <td>{! odl.totalSum}</td>
+                <td>{! odl.totalSumWithBrokerPercent}</td>
+            </tr>
+        </apex:repeat>
+        <apex:repeat value="{! industrialDeals }" var="idl">
+        	<tr>
+                <td>{! idl.recordTypeName }</td>
+                <td>{! idl.amauntDels}</td>
+                <td>{! idl.totalSum }</td>
+                <td>{! idl.totalSumWithBrokerPercent}</td>
+            </tr>
+        </apex:repeat>
+        <apex:repeat value="{! spaceDeals }" var="sdl">
+        	<tr>
+                <td>{! sdl.recordTypeName }</td>
+                <td>{! sdl.amauntDels }</td>
+                <td>{! sdl.totalSum }</td>
+                <td>{! sdl.totalSumWithBrokerPercent}</td>
+            </tr>
+        </apex:repeat>
+    </table>
+    <div class="stamp">
+                               
+      <apex:image id="theImage" value="{!$Resource.Stamp}" width="100" height="100"
+                  alt="Description of image here"/>  
+   </div>
+</apex:page>
