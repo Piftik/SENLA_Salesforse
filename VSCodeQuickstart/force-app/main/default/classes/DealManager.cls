@@ -1,6 +1,8 @@
 public inherited sharing class DealManager {
 
     public static final Id SALE_RECORD_TYPE_ID = '';
+    private String STATUS_ORDER = 'Closed Won';
+
 
         public class DealWrapper {
             public Id buyer {get; set;}
@@ -39,7 +41,9 @@ public inherited sharing class DealManager {
             delete [SELECT Id FROM Deal__c WHERE Deal.Id IN : Ids];
         }
 
-     
+     public static List<Deal__c> getDealsByClosedWon(List<Id> sellers, String fields) {
+        return Database.query('SELECT ' + fields + ' FROM Deal__c WHERE Status__c =:STATUS_ORDER');
+    }
 
 public static List<Deal__c> getNotClosedSaleDealsByProperties(List<Id> propertyIds) {
    return [

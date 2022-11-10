@@ -1,71 +1,15 @@
 public with sharing  class PropertyOwnerController {
 	
-    private String statusOrder = 'Closed Won';
-      private final Contact con;
+     public ;
+    private final Contact contacts;
 
-    public PropertyOwnerController(ApexPages.StandardController stdController) {
-        this.con = (Contact)stdController.getRecord();
-    } 
-          
-	public List<DealTableWrapper> getOfficeDeals() {
-          List<Deal__c> listDeals = [Select Id, Total__c, OwnerId, Property_New__r.RecordType.Name,
-                               	Amount__c 
-                               FROM Deal__c 
-                               WHERE Status__c =:statusOrder 
-                               AND Property_New__r.RecordType.Name = 'Office']; 
-          
-          Map<String, List<Deal__c>> dealsByRecordType = new Map<String, List<Deal__c>>();
-          
-          for(Deal__c deal : listDeals) {
-            List<Deal__c> groupValue = dealsByRecordType.get(deal.Property_New__r.RecordType.Name);
-
-            if (groupValue == null) {
-                dealsByRecordType.put(deal.Property_New__r.RecordType.Name, new List<Deal__c>());    
-            }
-
-            dealsByRecordType.get(deal.Property_New__r.RecordType.Name).add(deal);
-        }
-          
-     List<DealTableWrapper> result = new List<DealTableWrapper>();
-        for (List<Deal__c> groupedDeals : dealsByRecordType.values()) {
-            result.add(new DealTableWrapper(groupedDeals));
-        }
-
-        return result;
-}
-       public List<DealTableWrapper> getIndustrialDeals() {
-    List<Deal__c> listDeals = [Select Id, Total__c, OwnerId, Property_New__r.RecordType.Name,
-                               	Amount__c
-                               FROM Deal__c 
-                               WHERE Status__c =:statusOrder 
-                               AND Property_New__r.RecordType.Name = 'Industrial']; 
-          
-          Map<String, List<Deal__c>> dealsByRecordType = new Map<String, List<Deal__c>>();
-          
-          for(Deal__c deal : listDeals) {
-            List<Deal__c> groupValue = dealsByRecordType.get(deal.Property_New__r.RecordType.Name);
-
-            if (groupValue == null) {
-                dealsByRecordType.put(deal.Property_New__r.RecordType.Name, new List<Deal__c>());    
-            }
-
-            dealsByRecordType.get(deal.Property_New__r.RecordType.Name).add(deal);
-        }
-          
-     List<DealTableWrapper> result = new List<DealTableWrapper>();
-        for (List<Deal__c> groupedDeals : dealsByRecordType.values()) {
-            result.add(new DealTableWrapper(groupedDeals));
-        }
-
-        return result;
-}
+    public PropertyOwnerInfoReportController(ApexPages.StandardController stdController) {
+        this.contacts = (Contact)stdController.getRecord();
+    }
     
-      public List<DealTableWrapper> getSpaceDeals() {
-    List<Deal__c> listDeals = [Select Id, Total__c, OwnerId, Property_New__r.RecordType.Name,
-                               	Amount__c 
-                               FROM Deal__c 
-                               WHERE Status__c =:statusOrder 
-                               AND Property_New__r.RecordType.Name = 'Space']; 
+          public List<DealTableWrapper> getDeals() {
+        String fields = 'Id, Total__c, OwnerId, Property_New__r.RecordType.Name, Total_Percent__c';
+            List<Deal__c> listDeals = DealManager.getDealsByClosedWon (new List<Id>{contacts.Id}, fields);
           
           Map<String, List<Deal__c>> dealsByRecordType = new Map<String, List<Deal__c>>();
           
