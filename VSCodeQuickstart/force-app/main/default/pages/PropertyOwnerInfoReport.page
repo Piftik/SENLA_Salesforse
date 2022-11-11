@@ -1,18 +1,19 @@
-<apex:page
-  lightningStylesheets="true"
-  controller="PropertyOwnerController"
- >
+<apex:page lightningStylesheets="true" controller="PropertyOwnerController">
   <head>
     <style type="text/css">
-       
-
       .header {
         display: flex;
         justify-content: center;
       }
-     
-      .panelStyle{
 
+      .panelStyle {
+        font-size: 12px;
+      }
+      .tableStyle {
+        border-collapse: collapse;
+        text-align: center;
+        font-size: 12px;
+        padding: 25px;
       }
       .stamp {
         display: flex;
@@ -20,11 +21,7 @@
         height: 96px;
         width: 100%;
       }
-      .tableStyle{ border-collapse: collapse ;
-                    text-align: center;
-                    font-size: 12px;
-                    padding: 25px;
-                    }
+
       .stamp img {
         height: 100%;
         object-fit: cover;
@@ -32,33 +29,38 @@
       }
     </style>
   </head>
-  <apex:pageBlock >
-    <apex:pageBlockSection >
-        <apex:panelGroup >
-            <div class="header">
-            <apex:outputText value="Property Owner Info Report"/>
-            </div>
-        </apex:panelGroup>
+  <apex:pageBlock>
+    <apex:pageBlockSection>
+      <apex:panelGroup>
+        <div class="header">
+          <apex:outputText value="Property Owner Info Report" />
+        </div>
+      </apex:panelGroup>
 
-        <apex:panelGroup styleClass="panelStyle">
-            <apex:outputText style="font-weight:bold" value="Property Owner Name: "/>
-            <apex:outputText value="{! contact.Name}"/> 
-        </apex:panelGroup>
-        <apex:panelGroup styleClass="panelStyle">
-            <apex:outputText style="font-weight:bold" value="Total Properties Prices($): "/>
-            <apex:outputText value="{! contact.Total_Property_price__c}"/> 
-        </apex:panelGroup>
+      <apex:panelGroup styleClass="panelStyle">
+        <apex:outputText value="Property Owner Name: " />
+        <apex:outputText value="{! contact.Name}" />
+      </apex:panelGroup>
+      <apex:panelGroup styleClass="panelStyle">
+        <apex:outputText value="Total Properties Prices($): " />
+        <apex:outputText value="{! contact.Total_Property_price__c}" />
+      </apex:panelGroup>
     </apex:pageBlockSection>
 
     <apex:pageBlockTable styleClass="tableStyle" value="{! deals}" var="deal">
-        <apex:column headerValue="Property Type" value="{! deal.recordTypeName }"/>
-        <apex:column headerValue="Amount" value="{! deal.amauntDels }"/>
-        <apex:column headerValue="SumTransaction" value="{! deal.totalSum}"/>
-        <apex:column headerValue="Total" value="{! deal.totalSumWithBrokerPercent}"/>            
+      <apex:column
+        headerValue="Property Type"
+        value="{! deal.recordTypeName }"
+      />
+      <apex:column headerValue="Amount" value="{! deal.amauntDels }" />
+      <apex:column headerValue="SumTransaction" value="{! deal.totalSum}" />
+      <apex:column
+        headerValue="Total"
+        value="{! deal.totalSumWithBrokerPercent}"
+      />
     </apex:pageBlockTable>
+  </apex:pageBlock>
 
-    </apex:pageBlock>
-       
   <div class="stamp">
     <apex:image
       id="theImage"

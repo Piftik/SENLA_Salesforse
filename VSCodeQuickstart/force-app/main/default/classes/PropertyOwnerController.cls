@@ -10,8 +10,7 @@ public with sharing  class PropertyOwnerController {
     }
     public List<DealsInfoForTable.DealTableWrapper> getDeals() {
         return DealsInfoForTable.getDealsInfoForTable(this.deals);
-    }
-          
+    }        
        
     
 }
