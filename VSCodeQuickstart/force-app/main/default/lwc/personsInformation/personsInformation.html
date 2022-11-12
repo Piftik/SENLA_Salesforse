@@ -1,0 +1,79 @@
+<template>
+  <lightning-card title="Persons information">
+    <div class="slds-p-around_medium lgc-bg">
+      <lightning-combobox
+        class="slds-float_left slds-m-around_x-small"
+        data-id="sortByBox"
+        name="Filter"
+        label="Sort By"
+        placeholder="Choose Sort Filter"
+        value={value}
+        onchange={handleChange}
+        options={options}
+      ></lightning-combobox>
+
+      <lightning-input
+        field-name="Email"
+        type="email"
+        data-id="emailinput"
+        placeholder="user@example.com"
+        maxlength="42"
+        message-when-too-long="email cannot be longer than 42 characters."
+        pattern=".+@salesforce.com"
+        onchange={handleChangeEmail}
+      >
+      </lightning-input>
+      <lightning-input
+        type="date"
+        name="from"
+        data-id="fromSort"
+        label="From"
+        onchange={handleChangeFrom}
+      >
+      </lightning-input>
+      <lightning-input
+        type="date"
+        name="to"
+        label="To"
+        data-id="toSort"
+        onchange={handleChangeTo}
+      >
+      </lightning-input>
+
+      <div>
+        <lightning-input
+          id="maleBox"
+          class="slds-float_left slds-m-around_x-small"
+          type="checkbox"
+          label="Male"
+          name="M"
+          data-id="checkbox"
+          onclick={handleGenderFilter}
+        ></lightning-input>
+        <lightning-input
+          id="femaleBox"
+          class="slds-float_left slds-m-around_x-small"
+          type="checkbox"
+          label="Female"
+          name="F"
+          data-id="checkbox"
+          onclick={handleGenderFilter}
+        ></lightning-input>
+        <lightning-button
+          class="slds-float_right slds-m-around_small"
+          label="Reset All"
+          name="id"
+          onclick={handleReset}
+        ></lightning-button>
+      </div>
+    </div>
+    <lightning-datatable
+      key-field="id"
+      data-id="table"
+      columns={columns}
+      data={data}
+      hide-checkbox-column
+    >
+    </lightning-datatable>
+  </lightning-card>
+</template>
