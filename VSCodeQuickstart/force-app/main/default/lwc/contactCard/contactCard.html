@@ -1,0 +1,37 @@
+<template>
+  <div class="slds-p-around_medium">
+    <lightning-card icon-name="standard:contact" title="List of Contacts">
+      <template if:true={contact.data}>
+        <div class="slds-m-around_medium">
+          <p>{firstName}</p>
+          <p>{lastName}</p>
+
+          <lightning-formatted-phone value={phone}></lightning-formatted-phone
+          ><br />
+          <lightning-formatted-phone
+            value={homePhone}
+          ></lightning-formatted-phone
+          ><br />
+          <lightning-formatted-email value={email}></lightning-formatted-email
+          ><br /><br />
+          <p>
+            <lightning-formatted-number
+              format-style="currency"
+              value={total}
+              currency-code="USD"
+            >
+            </lightning-formatted-number>
+          </p>
+          <p>
+            <lightning-button
+              label="Go Contact Page"
+              onclick={navigateToViewContactPage}
+            ></lightning-button>
+          </p></div
+      ></template>
+      <template if:true={contact.eror}>
+        <c-error-panel errors={contact.error}></c-error-panel>
+      </template>
+    </lightning-card>
+  </div>
+</template>
