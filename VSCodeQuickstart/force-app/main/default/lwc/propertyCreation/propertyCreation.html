@@ -1,0 +1,16 @@
+<template>
+  <lightning-card title="Property Creation" icon-name="custom:custom24">
+    <div class="slds-p-around_medium lgc-bg">
+      <template if:true={isTypesCurrentPage}>
+        <c-property-record-type onnext={next}></c-property-record-type>
+      </template>
+      <template if:false={isTypesCurrentPage}>
+        <c-page-property-create
+          property-type={propertyType}
+          record-id={recordId}
+          onnext={next}
+        ></c-page-property-create>
+      </template>
+    </div>
+  </lightning-card>
+</template>
