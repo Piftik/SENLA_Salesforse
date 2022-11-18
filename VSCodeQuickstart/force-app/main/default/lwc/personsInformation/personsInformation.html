@@ -2,15 +2,14 @@
   <lightning-card title="Persons information">
     <div class="slds-p-around_medium lgc-bg">
       <lightning-combobox
-        class="slds-float_left slds-m-around_x-small"
-        data-id="sortByBox"
-        name="Filter"
-        label="Sort By"
-        placeholder="Choose Sort Filter"
+        name="sortBy"
+        label="Sort by"
         value={value}
-        onchange={handleChange}
+        placeholder="Sort by"
         options={options}
-      ></lightning-combobox>
+        onchange={handleSortBy}
+      >
+      </lightning-combobox>
 
       <lightning-input
         field-name="Email"
@@ -28,7 +27,7 @@
         name="from"
         data-id="fromSort"
         label="From"
-        onchange={handleChangeFrom}
+        onchange={handleChangeDateFrom}
       >
       </lightning-input>
       <lightning-input
@@ -36,35 +35,31 @@
         name="to"
         label="To"
         data-id="toSort"
-        onchange={handleChangeTo}
+        onchange={handleChangeDateTo}
       >
       </lightning-input>
 
       <div>
-        <lightning-input
-          id="maleBox"
-          class="slds-float_left slds-m-around_x-small"
-          type="checkbox"
-          label="Male"
-          name="M"
-          data-id="checkbox"
-          onclick={handleGenderFilter}
-        ></lightning-input>
-        <lightning-input
-          id="femaleBox"
-          class="slds-float_left slds-m-around_x-small"
-          type="checkbox"
-          label="Female"
-          name="F"
-          data-id="checkbox"
-          onclick={handleGenderFilter}
-        ></lightning-input>
+        <template for:each={optionsGender} for:item="gender">
+          <lightning-input
+            key={gender.value}
+            name={gender.value}
+            label={gender.label}
+            type="checkbox"
+            value={gender.value}
+            checked={gender.checked}
+            onchange={handleChangeGender}
+          >
+          </lightning-input>
+        </template>
+
         <lightning-button
-          class="slds-float_right slds-m-around_small"
-          label="Reset All"
-          name="id"
+          variant="Neutral"
+          label="Resert All"
+          type="reset"
           onclick={handleReset}
-        ></lightning-button>
+        >
+        </lightning-button>
       </div>
     </div>
     <lightning-datatable
@@ -72,7 +67,7 @@
       data-id="table"
       columns={columns}
       data={data}
-      hide-checkbox-column
+      hide-checkbox-column="true"
     >
     </lightning-datatable>
   </lightning-card>
