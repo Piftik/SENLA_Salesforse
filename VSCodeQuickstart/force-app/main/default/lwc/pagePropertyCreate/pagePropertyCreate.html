@@ -1,12 +1,7 @@
 <template>
   <lightning-card>
     <template for:each={rows} for:item="row" for:index="index">
-      <lightning-record-edit-form
-        key={row.uuid}
-        object-api-name={propertyObject}
-        onsuccess={handleSuccess}
-        onerror={handleError}
-      >
+      <lightning-record-edit-form key={row.id} object-api-name={propertyObject}>
         <lightning-messages></lightning-messages>
         <lightning-layout>
           <lightning-layout-item flexibility="auto" padding="around-small">
@@ -27,6 +22,7 @@
 
           <lightning-layout-item flexibility="auto" padding="around-small">
             <lightning-input-field
+              disabled="true"
               field-name="Property_Owner__c"
               value={recordId}
             ></lightning-input-field>
@@ -35,9 +31,9 @@
           <lightning-layout-item class="slds-p-around_small slds-m-top_large">
             <lightning-button-icon
               icon-name="action:new"
-              variant="brand"
-              alternative-text="Add"
+              alternative-text="Add Row"
               name="add"
+              access-key={row.id}
               onclick={addRow}
               id={index}
             >
@@ -47,30 +43,29 @@
           <lightning-layout-item class="slds-p-around_small slds-m-top_large">
             <lightning-button-icon
               icon-name="action:delete"
-              variant="brand"
-              value={index}
-              alternative-text="Delete"
+              alternative-text="Delete Row"
               name="delete"
-              onclick={removeRow}
+              access-key={row.id}
+              onclick={deleteRow}
               id={index}
             >
             </lightning-button-icon>
           </lightning-layout-item>
         </lightning-layout>
-
-        <div class="slds-m-top_medium">
-          <lightning-button
-            class="slds-m-top_small"
-            label="Close"
-            onclick={handleClose}
-          ></lightning-button>
-          <lightning-button
-            class="slds-m-top_small"
-            type="submit"
-            label="Submit"
-          ></lightning-button>
-        </div>
       </lightning-record-edit-form>
     </template>
+    <div class="slds-m-top_medium">
+      <lightning-button
+        class="slds-m-top_small"
+        label="Close"
+        onclick={handleCancel}
+      ></lightning-button>
+      <lightning-button
+        class="slds-m-top_small"
+        ariant="success"
+        onclick={handleSubmit}
+        label="Submit"
+      ></lightning-button>
+    </div>
   </lightning-card>
 </template>

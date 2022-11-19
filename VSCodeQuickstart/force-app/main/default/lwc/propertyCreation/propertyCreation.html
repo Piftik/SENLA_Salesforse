@@ -1,14 +1,15 @@
 <template>
   <lightning-card title="Property Creation" icon-name="custom:custom24">
     <div class="slds-p-around_medium lgc-bg">
-      <template if:true={isTypesCurrentPage}>
-        <c-property-record-type onnext={next}></c-property-record-type>
+      <template if:false={isPropertyTypeSubmitted}>
+        <c-property-record-type
+          ontypesubmit={handleTypeSubmit}
+        ></c-property-record-type>
       </template>
-      <template if:false={isTypesCurrentPage}>
+      <template if:true={isPropertyTypeSubmitted}>
         <c-page-property-create
-          property-type={propertyType}
           record-id={recordId}
-          onnext={next}
+          ontypesubmit={handleTypeSubmit}
         ></c-page-property-create>
       </template>
     </div>
