@@ -1,73 +1,106 @@
 import { LightningElement, api, track } from "lwc";
-import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import PROPERTY_OBJECT from "@salesforce/schema/Property_New__c";
+import {
+  SUCCESS_TITLE,
+  SUCCESS_VARIANT,
+  ERROR_TITLE,
+  ERROR_VARIANT,
+  showNatification
+} from "c/utils";
 
 export default class PagePropertyCreate extends LightningElement {
   @api recordId;
   @api propertyObject = PROPERTY_OBJECT;
-  @track rows = [{ uuid: this.createUUID() }];
+  keyIndex = 0;
 
-  handleSuccess() {
-    this.dispatchEvent(
-      new ShowToastEvent({
-        title: "Success",
-        message: "Records created.",
-        variant: "success"
-      }) //&&
-      // new CustomEvent("next", {
-      //   detail: {
-      //     isTypesCurrentPage: true
-      //   }
-      // })
-    );
+  @track rows = [{ id: 0 }];
+
+  handleSubmit() {
+    let isVal = true;
+    this.template
+      .querySelectorAll("lightning-input-field")
+      .forEach((element) => {
+        isVal = isVal && element.reportValidity();
+      });
+    if (isVal) {
+      try {
+        this.template
+          .querySelectorAll("lightning-record-edit-form")
+          .forEach((element) => {
+            element.submit();
+          });
+
+        this.displaySuccess();
+        this.handleCancel();
+      } catch (error) {
+        this.displayError(error);
+      }
+    }
   }
+  handleCancel() {
+    this.keyIndex = 0;
+    this.elements = [{ id: 0 }];
 
-  handleError(error) {
-    const toastEvent = new ShowToastEvent({
-      title: "Creation error",
-      message: error.getMessage(),
-      variant: "destructive"
-    });
-    this.dispatchEvent(toastEvent);
-  }
-
-  @api
-  handleClose() {
     this.dispatchEvent(
-      new CustomEvent("next", {
+      new CustomEvent("typesubmit", {
         detail: {
-          isTypesCurrentPage: true
+          isPropertyTypeSubmitted: false
         }
       })
     );
   }
 
-  createUUID() {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-      /[xy]/g,
-      function (c) {
-        var r = (Math.random() * 16) | 0,
-          v = c === "x" ? r : (r & 0x3) | 0x8;
-        return v.toString(16);
-      }
-    );
+  displaySuccess() {
+    showNatification(SUCCESS_TITLE, "create property", SUCCESS_VARIANT);
   }
-  removeRow(event) {
-    if (this.rows.length > 1) {
-      this.rows.splice(event.target.value, 1);
-    }
+
+  displayError(error) {
+    showNatification(ERROR_TITLE, error.getMessage(), ERROR_VARIANT);
   }
 
   addRow() {
-    if (this.rows.length === 3) {
-      Array.from(
-        this.template.querySelectorAll('lightning-button-icon[name="add"]')
-      ).forEach((element) => {
-        element.disabled = true;
-      });
-    }
     if (this.rows.length < 3) {
-      this.rows.push({ uuid: this.createUUID() });
+      ++this.keyIndex;
+      let newElement = { id: this.keyIndex };
+      this.rows.push(newElement);
+
+      if (this.rows.length === 2) {
+        Array.from(
+          this.template.querySelectorAll('lightning-button-icon[name="delete"]')
+        ).forEach((element) => {
+          element.disabled = false;
+        });
+      }
+
+      if (this.rows.length === 3) {
+        Array.from(
+          this.template.querySelectorAll('lightning-button-icon[name="add"]')
+        ).forEach((element) => {
+          element.disabled = true;
+        });
+      }
+    }
+  }
+
+  deleteRow(event) {
+    if (this.rows.length > 1) {
+      this.rows = this.rows.filter(function (element) {
+        return element.id !== parseInt(event.target.accessKey, 10);
+      });
+
+      if (this.rows.length === 1) {
+        this.template.querySelector(
+          'lightning-button-icon[name="delete"]'
+        ).disabled = true;
+      }
+
+      if (this.rows.length === 2) {
+        Array.from(
+          this.template.querySelectorAll('lightning-button-icon[name="add"]')
+        ).forEach((element) => {
+          element.disabled = false;
+        });
+      }
     }
   }
 }

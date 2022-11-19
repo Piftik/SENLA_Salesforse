@@ -34,12 +34,12 @@ export default class PropertyRecordType extends LightningElement {
     this.checkedValue = event.target.name;
   }
 
-  submitRecordType() {
+  submitType(event) {
     this.dispatchEvent(
-      new CustomEvent("next", {
+      new CustomEvent("typesubmit", {
         detail: {
-          isTypesCurrentPage: false,
-          checkedValue: this.checkedValue
+          isPropertyTypeSubmitted: true,
+          propertyType: this.propertyType
         }
       })
     );

@@ -5,12 +5,11 @@ export default class PropertyCreation extends LightningElement {
 
   @api objectApiName;
 
-  isTypesCurrentPage = true;
+  isPropertyTypeSubmitted = false;
   propertyType;
 
-  @api
-  next(event) {
-    this.isTypesCurrentPage = event.detail.isTypesPageCurrent;
+  handleTypeSubmit(event) {
+    this.isPropertyTypeSubmitted = event.detail.isPropertyTypeSubmitted;
     this.propertyType = event.detail.propertyType;
   }
 }
