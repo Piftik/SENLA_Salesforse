@@ -1,3 +1,18 @@
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
+
+const SUCCESS_TITLE = "Succes submit";
+const SUCCESS_VARIANT = "succes";
+const ERROR_TITLE = "Error submit";
+const ERROR_VARIANT = "error";
+
+const showNatification = (title, message, variant) => {
+  const toastEvent = new ShowToastEvent({
+    title,
+    message,
+    variant
+  });
+  dispatchEvent(toastEvent);
+};
 const persons = [
   {
     id: 1,
@@ -93,4 +108,13 @@ const options = [
   { value: "email", label: "Email" }
 ];
 
-export { persons, columns, options };
+export {
+  persons,
+  columns,
+  options,
+  SUCCESS_TITLE,
+  SUCCESS_VARIANT,
+  ERROR_TITLE,
+  ERROR_VARIANT,
+  showNatification
+};

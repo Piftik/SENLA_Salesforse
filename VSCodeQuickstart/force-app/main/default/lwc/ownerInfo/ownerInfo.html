@@ -1,0 +1,28 @@
+<template>
+  <lightning-card title="Owner Info" icon-name="standard:avatar">
+    <div class="slds-p-bottom_large slds-p-left_large" style="width: 500px">
+      <lightning-record-view-form object-api-name="Contact" record-id={owner}>
+        <div class="slds-box">
+          <lightning-output-field field-name="FirstName">
+          </lightning-output-field>
+          <lightning-output-field field-name="LastName">
+          </lightning-output-field>
+          <lightning-output-field field-name="Phone"> </lightning-output-field>
+          <lightning-output-field field-name="HomePhone">
+          </lightning-output-field>
+          <lightning-output-field field-name="Email"> </lightning-output-field>
+          <lightning-output-field field-name="Total_Property_Price__c">
+          </lightning-output-field>
+        </div>
+      </lightning-record-view-form>
+      <br />
+      <lightning-button
+        label="Owner Page"
+        title="Contact record page"
+        onclick={navigateToOwnerPage}
+        class="slds-m-top_medium"
+        variant="brand"
+      ></lightning-button>
+    </div>
+  </lightning-card>
+</template>
