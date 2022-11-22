@@ -1,9 +1,34 @@
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
-
+import PROPERTY_OBJECT from "@salesforce/schema/Property_New__c";
 const SUCCESS_TITLE = "Succes submit";
 const SUCCESS_VARIANT = "succes";
 const ERROR_TITLE = "Error submit";
 const ERROR_VARIANT = "error";
+
+import LOG_LWC_OBJECT_TYPE from "@salesforce/schema/LogLWC__c.ObjectType__c";
+import LOG_LWC_ACTION_TYPE from "@salesforce/schema/LogLWC__c.ActionType__c";
+import LOG_LWC_DESCRIPTION from "@salesforce/schema/LogLWC__c.Description__c";
+import LOG_LWC_IS_SUCCESSFUL from "@salesforce/schema/LogLWC__c.IsSuccessful__c";
+import LOG_LWC_ERROR_MESSAGE from "@salesforce/schema/LogLWC__c.ErrorMessage__c";
+import LOG_LWC_CREATED_DATE from "@salesforce/schema/LogLWC__c.CreatedDate";
+
+const LOG_LWC_TABLE_FIELDS = [
+  LOG_LWC_OBJECT_TYPE.fieldApiName,
+  LOG_LWC_ACTION_TYPE.fieldApiName,
+  LOG_LWC_DESCRIPTION.fieldApiName,
+  LOG_LWC_IS_SUCCESSFUL.fieldApiName,
+  LOG_LWC_ERROR_MESSAGE.fieldApiName,
+  LOG_LWC_CREATED_DATE.fieldApiName
+];
+
+const LOG_LWC_TABLE_COLUMNS = [
+  { label: "ObjectType", fieldName: "ObjectType__c" },
+  { label: "ActionType", fieldName: "ActionType__c" },
+  { label: "Description", fieldName: "Description__c" },
+  { label: "IsSuccessful", fieldName: "IsSuccessful__c" },
+  { label: "ErrorMessage", fieldName: "ErrorMessage__c" },
+  { label: "CreatedDate", fieldName: "CreatedDate", type: "date" }
+];
 
 const showNatification = (title, message, variant) => {
   const toastEvent = new ShowToastEvent({
@@ -112,9 +137,13 @@ export {
   persons,
   columns,
   options,
+  PROPERTY_OBJECT,
   SUCCESS_TITLE,
   SUCCESS_VARIANT,
   ERROR_TITLE,
   ERROR_VARIANT,
+  LOG_LWC_CREATED_DATE,
+  LOG_LWC_TABLE_FIELDS,
+  LOG_LWC_TABLE_COLUMNS,
   showNatification
 };
