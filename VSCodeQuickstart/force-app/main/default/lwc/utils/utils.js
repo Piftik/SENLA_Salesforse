@@ -5,29 +5,25 @@ const SUCCESS_VARIANT = "succes";
 const ERROR_TITLE = "Error submit";
 const ERROR_VARIANT = "error";
 
-import LOG_LWC_OBJECT_TYPE from "@salesforce/schema/LogLWC__c.ObjectType__c";
-import LOG_LWC_ACTION_TYPE from "@salesforce/schema/LogLWC__c.ActionType__c";
-import LOG_LWC_DESCRIPTION from "@salesforce/schema/LogLWC__c.Description__c";
-import LOG_LWC_IS_SUCCESSFUL from "@salesforce/schema/LogLWC__c.IsSuccessful__c";
-import LOG_LWC_ERROR_MESSAGE from "@salesforce/schema/LogLWC__c.ErrorMessage__c";
-import LOG_LWC_CREATED_DATE from "@salesforce/schema/LogLWC__c.CreatedDate";
-
-const LOG_LWC_TABLE_FIELDS = [
-  LOG_LWC_OBJECT_TYPE.fieldApiName,
-  LOG_LWC_ACTION_TYPE.fieldApiName,
-  LOG_LWC_DESCRIPTION.fieldApiName,
-  LOG_LWC_IS_SUCCESSFUL.fieldApiName,
-  LOG_LWC_ERROR_MESSAGE.fieldApiName,
-  LOG_LWC_CREATED_DATE.fieldApiName
-];
+import DATE_CREATED from "@salesforce/schema/LogLWC__c.CreatedDate";
+import OBJECT_TYPE from "@salesforce/schema/LogLWC__c.ObjectType__c";
+import ACTION_TYPE from "@salesforce/schema/LogLWC__c.ActionType__c";
+import DESCRIPTION from "@salesforce/schema/LogLWC__c.Description__c";
+import IS_SUCCESSFUL from "@salesforce/schema/LogLWC__c.IsSuccessful__c";
+import ERROR_MESSAGE from "@salesforce/schema/LogLWC__c.ErrorMessage__c";
 
 const LOG_LWC_TABLE_COLUMNS = [
-  { label: "ObjectType", fieldName: "ObjectType__c" },
-  { label: "ActionType", fieldName: "ActionType__c" },
-  { label: "Description", fieldName: "Description__c" },
-  { label: "IsSuccessful", fieldName: "IsSuccessful__c" },
-  { label: "ErrorMessage", fieldName: "ErrorMessage__c" },
-  { label: "CreatedDate", fieldName: "CreatedDate", type: "date" }
+  {
+    label: "Created date",
+    fieldName: DATE_CREATED.fieldApiName,
+    type: "date",
+    sortable: true
+  },
+  { label: "Type object", fieldName: OBJECT_TYPE.fieldApiName, type: "text" },
+  { label: "Type action", fieldName: ACTION_TYPE.fieldApiName, type: "text" },
+  { label: "Description", fieldName: DESCRIPTION.fieldApiName, type: "text" },
+  { label: "Successful", fieldName: IS_SUCCESSFUL.fieldApiName, type: "text" },
+  { label: "Error", fieldName: ERROR_MESSAGE.fieldApiName, type: "text" }
 ];
 
 const showNatification = (title, message, variant) => {
@@ -142,8 +138,6 @@ export {
   SUCCESS_VARIANT,
   ERROR_TITLE,
   ERROR_VARIANT,
-  LOG_LWC_CREATED_DATE,
-  LOG_LWC_TABLE_FIELDS,
   LOG_LWC_TABLE_COLUMNS,
   showNatification
 };

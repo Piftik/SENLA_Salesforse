@@ -1,16 +1,15 @@
 <template>
-  <lightning-card title="LogsLWC" icon-name="standard:budget">
-    <div class="slds-m-around_medium">
-      <lightning-datatable
-        key-field="id"
-        data-id="table"
-        columns={columns}
-        data={data}
-        show-row-number-column
-        row-number-offset={rowOffset}
-        hide-checkbox-column
-      >
-      </lightning-datatable>
-    </div>
+  <lightning-card title="LogLWC information">
+      <template if:true={logs.data}>
+          <lightning-datatable
+              key-field="Id"
+              data={logs.data}
+              columns={columns}
+              hide-checkbox-column
+              default-sort-direction={defaultSortDirection}
+
+          >
+         </lightning-datatable>
+      </template>
   </lightning-card>
 </template>
