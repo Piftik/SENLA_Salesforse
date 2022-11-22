@@ -27,6 +27,21 @@ public class TestDataFactory {
         return property;
     }
 
+    public static LogLWC__c createLogLWC(String objectType, 
+    String actionType, 
+    String description, 
+    Boolean isSuccessful, 
+    String errorMessage
+) {
+LogLWC__c logLWC = new LogLWC__c(); 
+logLWC.ObjectType__c = objectType;
+logLWC.ActionType__c = actionType;
+logLWC.Description__c = description;
+logLWC.IsSuccessful__c = isSuccessful;
+logLWC.ErrorMessage__c = errorMessage;
 
+insert logLWC; 
+return logLWC;
+}
 
 }
