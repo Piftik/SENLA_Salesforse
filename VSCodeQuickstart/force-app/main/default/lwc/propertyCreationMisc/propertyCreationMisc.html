@@ -1,0 +1,26 @@
+<template>
+  <lightning-card title="Choose record type:" icon-name="custom:custom24">
+    <template if:true={objectInfo.data}>
+      <div class="slds-p-around_medium">
+        <template for:each={recordTypes} for:item="property">
+          <lightning-input
+            key={property.value}
+            class="slds-m-vertical_x-small"
+            type="checkbox"
+            label={property.name}
+            name={property.value}
+            data-id="record_type_checkbox"
+            checked={property.checked}
+            onclick={checkHandle}
+          ></lightning-input>
+        </template>
+        <lightning-button
+          class="slds-m-top_medium"
+          variant="brand"
+          label="Next"
+          onclick={submitType}
+        ></lightning-button>
+      </div>
+    </template>
+  </lightning-card>
+</template>
