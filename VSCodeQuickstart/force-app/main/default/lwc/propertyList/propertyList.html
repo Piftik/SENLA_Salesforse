@@ -1,0 +1,45 @@
+<template>
+  <lightning-card title="List Property" icon-name="custom:custom63">
+    <div class="slds-var-m-around_medium">
+      <template if:true={visibleRecords}>
+        <template for:each={visibleRecords} for:item="property">
+          <lightning-layout-item
+            class="slds-border_top slds-border_right slds-border_bottom slds-border_left"
+            key={property.Id}
+          >
+            <c-property-item
+              property={property}
+              onselectedprop={openDetails}
+            ></c-property-item>
+          </lightning-layout-item>
+        </template>
+      </template>
+
+      <div slot="footer" class="slds-var-m-vertical_medium">
+        <c-paginator
+          total-pages={totalPages}
+          onupdatepagerecords={updateRecords}
+        ></c-paginator>
+      </div>
+    </div>
+    <template if:true={showDetails}>
+      <div
+        class="slds-panel slds-size_medium slds-panel_docked slds-panel_docked-right slds-is-open"
+        aria-hidden={showDetails}
+        id="panelid"
+      >
+        <div class="slds-panel__header">
+          <lightning-button
+            variant="base"
+            onclick={hideDetails}
+            icon-name="utility:close"
+            class="slds-m-left_x-small"
+          ></lightning-button>
+        </div>
+        <div class="slds-panel__body">
+          <c-property-details prop-data={selectedProp}></c-property-details>
+        </div>
+      </div>
+    </template>
+  </lightning-card>
+</template>
