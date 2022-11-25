@@ -1,0 +1,12 @@
+<template>
+  <a href="#" onclick={handleSelect}>
+    <lightning-layout>
+      <lightning-layout-item>
+        <img src={property.Picture__c} alt="Property photo" width="70" height="70" />
+      </lightning-layout-item>
+      <lightning-layout-item padding="horizontal-small">
+        <p>{property.Name}</p>
+      </lightning-layout-item>
+    </lightning-layout>
+  </a>
+</template>

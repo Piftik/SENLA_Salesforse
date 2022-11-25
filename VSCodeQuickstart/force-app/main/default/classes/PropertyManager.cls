@@ -20,8 +20,11 @@ public with sharing class PropertyManager {
         return property;
     }
  
- 
-
+    @AuraEnabled(cacheable=true)
+    public static List<Property_New__c> getAllProperties(String fields){
+        return Database.query('SELECT ' + fields + ' FROM Property_New__c');
+    }
+    
     public static List<Property_New__c> getPropertiesByIds(List<Id> ids, String fields){
 
         String query = 'select ' + fields + ' from Property_New__c where Id in :ids';
@@ -36,11 +39,5 @@ public with sharing class PropertyManager {
         return property;
     }
     
-    public static List<Property_New__c> getPropertiesByAdress(String address){
-
-        String query = 'select ' + fields + ' from Property_New__c where Adress__c=:address';
-        List<Property_New__c> properties = Database.query(query);
-        return properties;
-    } 
-
+  
 }
