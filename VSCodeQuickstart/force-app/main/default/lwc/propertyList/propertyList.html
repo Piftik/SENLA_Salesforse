@@ -1,24 +1,21 @@
 <template>
   <lightning-card title="List Property" icon-name="custom:custom63">
     <div class="slds-var-m-around_medium">
-      <template if:true={visibleRecords}>
-        <template for:each={visibleRecords} for:item="property">
-          <lightning-layout-item
-            class="slds-border_top slds-border_right slds-border_bottom slds-border_left"
-            key={property.Id}
-          >
+      
+        <template for:each={visibleProperty} for:item="property">
+          <div class="slds-size_3-of-12" key={property.id}>
             <c-property-item
               property={property}
               onselectedprop={openDetails}
             ></c-property-item>
-          </lightning-layout-item>
+          </div>
         </template>
-      </template>
+      
 
       <div slot="footer" class="slds-var-m-vertical_medium">
         <c-paginator
-          total-pages={totalPages}
-          onupdatepagerecords={updateRecords}
+          records={totalProperties}
+          onupdate={updatePropertyHandler}
         ></c-paginator>
       </div>
     </div>
