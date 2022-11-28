@@ -1,7 +1,7 @@
 public with sharing class LogLWCController {
+
     @AuraEnabled(cacheable=false)
-    public static LogLWC__c createLogLWC(String objectType, String actionType, 
-                                         String description, String errorMessage){
+    public static LogLWC__c createLogLWC(String objectType, String actionType, String description, String errorMessage){
         try {
             LogLWCManager.LogLWCWrapper wrapper = new LogLWCManager.LogLWCWrapper();
             wrapper.objectType = objectType;
