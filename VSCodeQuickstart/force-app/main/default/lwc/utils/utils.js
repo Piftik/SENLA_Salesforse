@@ -1,5 +1,13 @@
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import PROPERTY_OBJECT from "@salesforce/schema/Property_New__c";
+
+import PROPERTY_ID from "@salesforce/schema/Property_New__c.id";
+import PROPERTY_ADDRESS from "@salesforce/schema/Property_New__c.Address__c";
+import PROPERTY_COST from "@salesforce/schema/Property_New__c.Cost_Sale__c";
+import PROPERTY_NAME from "@salesforce/schema/Property_New__c.Name";
+import PROPERTY_OWNER_NAME from "@salesforce/schema/Property_New__c.Property_Owner__r.Name";
+import PROPERTY_PICTURE from "@salesforce/schema/Property_New__c.Picture__c";
+
 const SUCCESS_TITLE = "Succes submit";
 const SUCCESS_VARIANT = "succes";
 const ERROR_TITLE = "Error submit";
@@ -12,6 +20,14 @@ import DESCRIPTION from "@salesforce/schema/LogLWC__c.Description__c";
 import IS_SUCCESSFUL from "@salesforce/schema/LogLWC__c.IsSuccessful__c";
 import ERROR_MESSAGE from "@salesforce/schema/LogLWC__c.ErrorMessage__c";
 
+const PROPERTY_FIELDS = [
+  PROPERTY_ID.fieldApiName,
+  PROPERTY_NAME.fieldApiName,
+  PROPERTY_ADDRESS.fieldApiName,
+  PROPERTY_OWNER_NAME.fieldApiName,
+  PROPERTY_COST.fieldApiName,
+  PROPERTY_PICTURE.fieldApiName
+];
 const LOG_LWC_TABLE_COLUMNS = [
   {
     label: "Created date",
@@ -134,6 +150,7 @@ export {
   columns,
   options,
   PROPERTY_OBJECT,
+  PROPERTY_FIELDS,
   SUCCESS_TITLE,
   SUCCESS_VARIANT,
   ERROR_TITLE,

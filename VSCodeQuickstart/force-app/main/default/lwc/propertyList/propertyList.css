@@ -1,0 +1,6 @@
+.content {
+  display: flex;
+  flex: 1;
+  background: white;
+  color: #000;
+}

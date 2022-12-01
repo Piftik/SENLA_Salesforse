@@ -1,42 +1,39 @@
 <template>
   <lightning-card title="List Property" icon-name="custom:custom63">
-    <div class="slds-var-m-around_medium">
-      
-        <template for:each={visibleProperty} for:item="property">
-          <div class="slds-size_3-of-12" key={property.id}>
+    <div class="slds-col slds-size_8-of-12">
+      <template if:true={spinner}>
+        <c-spinner></c-spinner> 
+      </template>
+     
+      <template if:true={visibleProperty}>
+        <div class="content">
+          <template for:each={visibleProperty} for:item="property">
             <c-property-item
+              key={property.id}
               property={property}
-              onselectedprop={openDetails}
+              onselecteditem={openDetails}
             ></c-property-item>
-          </div>
-        </template>
-      
+          </template>
+        </div>
 
+      </template>
+     
       <div slot="footer" class="slds-var-m-vertical_medium">
         <c-paginator
-          records={totalProperties}
-          onupdate={updatePropertyHandler}
+          total-pages={totalPages}
+          onupdaterecords={updatePropertyHandler}
         ></c-paginator>
       </div>
     </div>
     <template if:true={showDetails}>
-      <div
-        class="slds-panel slds-size_medium slds-panel_docked slds-panel_docked-right slds-is-open"
-        aria-hidden={showDetails}
-        id="panelid"
-      >
-        <div class="slds-panel__header">
-          <lightning-button
-            variant="base"
-            onclick={hideDetails}
-            icon-name="utility:close"
-            class="slds-m-left_x-small"
-          ></lightning-button>
-        </div>
-        <div class="slds-panel__body">
-          <c-property-details prop-data={selectedProp}></c-property-details>
-        </div>
+      <div class="slds-col slds-size_4-of-12">
+        <c-property-details prop-data={selectedProperty}></c-property-details>
+      </div>
+      
       </div>
     </template>
   </lightning-card>
+  <template if:true={isError}>
+    <c-error-handler error={error}></c-error-handler> 
+  </template>
 </template>
