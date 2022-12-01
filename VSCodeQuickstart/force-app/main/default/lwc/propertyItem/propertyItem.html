@@ -1,13 +1,11 @@
 <template>
-  <div class="block slds-box slds-m-around_small" onclick={selecteItem}>
-    <img
-      src={property.Picture__c}
-      alt="Property photo"
-      width="70"
-      height="70"
-    />
-    <div>
-      <p class="title slds-align_absolute-center">{property.name}</p>
-    </div>
+  <div class="container">
+    <a onclick={hendleSelect}>
+      <div><img src={property.Picture__c} alt="Property photo" /></div>
+      <div>
+        <p class="title slds-align_absolute-center">{property.Name}</p>
+        <p class="title slds-align_absolute-center">{property.Cost_Sale__c}</p>
+      </div>
+    </a>
   </div>
 </template>

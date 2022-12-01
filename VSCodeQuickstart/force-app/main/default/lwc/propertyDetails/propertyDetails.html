@@ -1,0 +1,14 @@
+<template>
+  <template if:true={propData}>
+    <img src={propData.Picture__c} width="150" height="150" />
+
+    <p>Name: {propData.Name}</p>
+    <p>Owner Name: {propData.Owner__r.Name}</p>
+    <p>Address: {propData.Adress__c}</p>
+    <lightning-formatted-number
+      value={propData.Cost_Sale__c}
+      format-style="currency"
+      currency-code="USD"
+    ></lightning-formatted-number>
+  </template>
+</template>
