@@ -1,0 +1,18 @@
+<apex:page showHeader="false" sidebar="false">
+    <apex:includeLightning />
+    <div id="LightningComponentid" />
+
+    <script>
+        $Lightning.use("c:AuraContactDetails", function () {
+            $Lightning.createComponent("c:contactDetails",
+                {
+                    message: 'Simple Message From VF Page',
+                    recordId: '{!$CurrentPage.parameters.id}'
+                },
+                "LightningComponentid",
+                function (cmp) {
+                    console.log('Calling the LWC Component');
+                });
+        });
+    </script>
+</apex:page>
