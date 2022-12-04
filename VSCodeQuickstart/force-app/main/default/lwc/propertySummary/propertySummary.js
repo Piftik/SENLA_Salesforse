@@ -16,6 +16,7 @@ import PROPERTY_PICTURE from "@salesforce/schema/Property_New__c.Picture__c";
 
 export default class PropertySummary extends LightningElement {
   propertyId;
+  spinner = true;
   propertyFields = [
     PROPERTY_ADDRESS,
     PROPERTY_COST,
@@ -59,11 +60,13 @@ export default class PropertySummary extends LightningElement {
         this.handlePropertySelected(message);
       }
     );
+    this.spinner = false;
   }
 
   disconnectedCallback() {
     unsubscribe(this.subscription);
     this.subscription = null;
+    this.spinner = false;
   }
 
   handlePropertySelected(message) {

@@ -1,4 +1,7 @@
 <template>
+  <template if:true={spinner}>
+    <c-spinner></c-spinner>
+  </template>
   <lightning-card icon-name="custom:custom85">
     <template if:true={property.data}>
       <span slot="title">{propertyName}</span>
