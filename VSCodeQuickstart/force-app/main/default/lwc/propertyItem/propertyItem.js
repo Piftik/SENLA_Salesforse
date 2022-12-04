@@ -4,10 +4,10 @@ export default class PropertyItem extends LightningElement {
   @api
   property;
 
-  hendleSelect() {
-    const event = new CustomEvent("selectedItem", {
-      detail: this.property
+  handlePropertySelected() {
+    const selectedEvent = new CustomEvent("selected", {
+      detail: this.property.Id
     });
-    this.dispatchEvent(event);
+    this.dispatchEvent(selectedEvent);
   }
 }

@@ -1,0 +1,33 @@
+<template>
+  <div class="slds-card slds-var-p-around_small">
+    <template if:true={spinner}>
+      <c-spinner></c-spinner>
+    </template>
+
+    <template if:true={properties.data}>
+      <div class="slds-grid slds-wrap">
+        <template for:each={properties.data.records} for:item="property">
+          <c-property-item
+            property={property}
+            key={property.Id}
+            onselected={handlePropertySelected}
+            class="slds-col slds-var-m-around_xx-small"
+          ></c-property-item>
+        </template>
+      </div>
+      <c-pagin
+        page-number={pageNumber}
+        page-size={pageSize}
+        total-item-count={properties.data.totalItemCount}
+        onprevious={handlePreviousPage}
+        onnext={handleNextPage}
+      ></c-pagin>
+    </template>
+    <template if:true={properties.error}>
+      <c-error-panel
+        friendly-message="Error retrieving data"
+        errors={properties.error}
+      ></c-error-panel>
+    </template>
+  </div>
+</template>

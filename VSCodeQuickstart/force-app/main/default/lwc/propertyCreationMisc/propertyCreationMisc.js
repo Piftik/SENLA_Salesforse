@@ -38,7 +38,7 @@ export default class PropertyCreationMisc extends LightningElement {
 
   handleSubmit() {
     let isVal = true;
-    let logDescription = `Proprty has been created`;
+    let logDescription = ` ${this.rows.length}  Proprty has been created`;
     let errorMessage = "";
     this.template
       .querySelectorAll("lightning-input-field")

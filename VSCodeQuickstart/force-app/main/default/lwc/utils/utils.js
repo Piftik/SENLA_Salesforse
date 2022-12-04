@@ -28,6 +28,15 @@ const PROPERTY_FIELDS = [
   PROPERTY_COST.fieldApiName,
   PROPERTY_PICTURE.fieldApiName
 ];
+
+const LOG_LWC_FIELDS=[
+  DATE_CREATED.fieldApiName,
+  OBJECT_TYPE.fieldApiName,
+  ACTION_TYPE.fieldApiName,
+  DESCRIPTION.fieldApiName,
+  IS_SUCCESSFUL.fieldApiName,
+  ERROR_MESSAGE.fieldApiName,
+]
 const LOG_LWC_TABLE_COLUMNS = [
   {
     label: "Created date",
@@ -150,6 +159,7 @@ export {
   columns,
   options,
   PROPERTY_OBJECT,
+  LOG_LWC_FIELDS,
   PROPERTY_FIELDS,
   SUCCESS_TITLE,
   SUCCESS_VARIANT,

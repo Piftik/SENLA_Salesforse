@@ -1,10 +1,17 @@
 <template>
   <div class="container">
-    <a onclick={hendleSelect}>
+    <a onclick={handlePropertySelected}>
       <div><img src={property.Picture__c} alt="Property photo" /></div>
       <div>
         <p class="title slds-align_absolute-center">{property.Name}</p>
-        <p class="title slds-align_absolute-center">{property.Cost_Sale__c}</p>
+
+        <p class="title slds-align_absolute-center">
+          <lightning-formatted-number
+            format-style="currency"
+            currency-code="USD"
+            value={property.Cost_Sale__c}
+          ></lightning-formatted-number>
+        </p>
       </div>
     </a>
   </div>
