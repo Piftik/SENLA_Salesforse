@@ -9,6 +9,7 @@ const PAGE_SIZE = 8;
 export default class PropertyTileList extends LightningElement {
   pageNumber = 1;
   pageSize = PAGE_SIZE;
+  spinner = true;
 
   @wire(MessageContext)
   messageContext;
@@ -30,5 +31,8 @@ export default class PropertyTileList extends LightningElement {
   handlePropertySelected(event) {
     const message = { propertyId: event.detail };
     publish(this.messageContext, PROPERTYSELECTEDMC, message);
+  }
+  connectedCallback() {
+    this.spinner = false;
   }
 }
